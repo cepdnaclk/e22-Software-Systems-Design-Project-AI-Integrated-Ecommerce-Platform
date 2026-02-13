@@ -2,6 +2,10 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import authRouter from "./router/authRouter.js";
+import "./cron/dailySendToAI.js";
+import aiRouter from "./router/aiRouter.js";
+import productRouter from "./router/productRouter.js";
+
 
 // ================== CONFIG ==================
 const PORT = 3000;
@@ -49,6 +53,12 @@ app.use((req, res, next) => {
 
 // Auth routes
 app.use("/api/auth", authRouter);
+
+// AI result routes
+app.use("/api/ai", aiRouter);
+
+// Product routes
+app.use("/api/products", productRouter);
 
 // Test protected route
 app.get("/api/protected", (req, res) => {
